@@ -12,6 +12,8 @@ import { ReviewReports } from './views/ReviewReports';
 import { AnalysisReports } from './views/AnalysisReports';
 import { ProjectLifecycle } from './views/ProjectLifecycle';
 
+import { PartnerDirectory } from './views/PartnerDirectory';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -59,6 +61,7 @@ export default function App() {
     switch (activeTab) {
       case 'dashboard': return <Dashboard />;
       case 'lifecycle': return <ProjectLifecycle />;
+      case 'partner': return <PartnerDirectory />;
       case 'level': return <ProjectLevel />;
       case 'post-review': return <PostBidReview />;
       case 'pre-review': return <PreBidReview />;

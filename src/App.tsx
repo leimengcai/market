@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  LayoutDashboard, Users, Flag, Database, ListFilter, FileCheck, Search, Menu, Building2,
+  LayoutDashboard, Users, Flag, Database, ListFilter, FileCheck, SearchCode, Search, Menu, Building2,
   Target, UserCheck, CircleDollarSign, BookOpen, Award, ArrowLeftRight, BarChart3, Box, PieChart
 } from 'lucide-react';
 import { Dashboard } from './views/Dashboard';
@@ -10,6 +10,7 @@ import { PreBidReview } from './views/PreBidReview';
 import { KnowledgeBase } from './views/KnowledgeBase';
 import { ReviewReports } from './views/ReviewReports';
 import { AnalysisReports } from './views/AnalysisReports';
+import { ProjectLifecycle } from './views/ProjectLifecycle';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -20,6 +21,7 @@ export default function App() {
       title: '概览',
       items: [
         { id: 'dashboard', name: '驾驶舱总览', icon: LayoutDashboard },
+        { id: 'lifecycle', name: '项目全景查询', icon: SearchCode, badge: '关联' }
       ]
     },
     {
@@ -39,7 +41,7 @@ export default function App() {
         { id: 'bond-pay', name: '投标保证金支付', icon: CircleDollarSign },
         { id: 'bid-review', name: '投标立项与标书评审', icon: BookOpen },
         { id: 'bid-result', name: '投标结果与通知书', icon: Award },
-        { id: 'post-review', name: '投标后复盘', icon: Flag, badge: 1 },
+        { id: 'post-review', name: '投标后复盘', icon: Flag, badge: '1' },
         { id: 'bond-return', name: '保证金退回管理', icon: ArrowLeftRight },
       ]
     },
@@ -56,6 +58,7 @@ export default function App() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard': return <Dashboard />;
+      case 'lifecycle': return <ProjectLifecycle />;
       case 'level': return <ProjectLevel />;
       case 'post-review': return <PostBidReview />;
       case 'pre-review': return <PreBidReview />;
@@ -102,7 +105,7 @@ export default function App() {
                         <item.icon className="h-5 w-5" />
                         {item.name}
                         {"badge" in item && (
-                          <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">{item.badge}</span>
+                          <span className="ml-auto flex h-5 min-w-[20px] px-1.5 items-center justify-center rounded-full bg-red-50 text-[10px] text-red-600 font-bold border border-red-200 whitespace-nowrap">{item.badge}</span>
                         )}
                       </button>
                    ))}
@@ -184,7 +187,7 @@ export default function App() {
                     <item.icon className="h-5 w-5" />
                     {item.name}
                     {"badge" in item && (
-                      <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">{item.badge}</span>
+                      <span className="ml-auto flex h-5 min-w-[20px] px-1.5 items-center justify-center rounded-full bg-red-50 text-[10px] text-red-600 font-bold border border-red-200 whitespace-nowrap">{item.badge}</span>
                     )}
                   </button>
                 ))}

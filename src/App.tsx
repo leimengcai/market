@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { 
   LayoutDashboard, Users, Flag, Database, ListFilter, FileCheck, Search, Menu, Building2,
-  Target, UserCheck, CircleDollarSign, BookOpen, Award, ArrowLeftRight, BarChart3, Box
+  Target, UserCheck, CircleDollarSign, BookOpen, Award, ArrowLeftRight, BarChart3, Box, PieChart
 } from 'lucide-react';
 import { Dashboard } from './views/Dashboard';
 import { ProjectLevel } from './views/ProjectLevel';
 import { PostBidReview } from './views/PostBidReview';
 import { PreBidReview } from './views/PreBidReview';
 import { KnowledgeBase } from './views/KnowledgeBase';
+import { ReviewReports } from './views/ReviewReports';
+import { AnalysisReports } from './views/AnalysisReports';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -44,6 +46,7 @@ export default function App() {
     {
       title: '数据中心',
       items: [
+        { id: 'data-analysis', name: '全维度运营分析表', icon: PieChart },
         { id: 'reports', name: '复盘报表与分析', icon: BarChart3 },
         { id: 'knowledge', name: '数据与知识库沉淀', icon: Database },
       ]
@@ -56,6 +59,8 @@ export default function App() {
       case 'level': return <ProjectLevel />;
       case 'post-review': return <PostBidReview />;
       case 'pre-review': return <PreBidReview />;
+      case 'reports': return <ReviewReports />;
+      case 'data-analysis': return <AnalysisReports />;
       case 'knowledge': return <KnowledgeBase />;
       default: return (
         <div className="flex h-full items-center justify-center text-slate-500 flex-col gap-4 animate-in fade-in duration-500">

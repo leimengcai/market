@@ -14,6 +14,8 @@ import { ProjectLifecycle } from './views/ProjectLifecycle';
 
 import { PartnerDirectory } from './views/PartnerDirectory';
 
+import { MarketInfo } from './views/MarketInfo';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -62,6 +64,7 @@ export default function App() {
       case 'dashboard': return <Dashboard />;
       case 'lifecycle': return <ProjectLifecycle />;
       case 'partner': return <PartnerDirectory />;
+      case 'market-info': return <MarketInfo />;
       case 'level': return <ProjectLevel />;
       case 'post-review': return <PostBidReview />;
       case 'pre-review': return <PreBidReview />;

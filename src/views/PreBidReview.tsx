@@ -5,12 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Save, CheckCircle, AlertTriangle, ArrowRight, ShieldAlert, Target, Activity, BrainCircuit, RefreshCw } from 'lucide-react';
+import { Save, CheckCircle, AlertTriangle, ArrowRight, ShieldAlert, Target, Activity, BrainCircuit, RefreshCw, Search, Plus, X } from 'lucide-react';
 
 export function PreBidReview() {
   const [analyzing, setAnalyzing] = useState(false);
   const [aiScore, setAiScore] = useState<number | null>(null);
   const [reviewResult, setReviewResult] = useState<string>('继续跟踪');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const runAiAnalysis = () => {
     setAnalyzing(true);
@@ -20,8 +21,29 @@ export function PreBidReview() {
     }, 1500);
   }
 
+  const projectList = [
+    "苏南智造谷二期基础设施建设工程",
+    "云港新能源装置 EPC 项目",
+    "惠州炼化乙烯三期",
+    "印尼镍铁冶炼一期",
+    "内蒙古某园区基础设施",
+    "宁东能源化工基地 220kV 变电站"
+  ];
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
+      {/* 顶部搜索与新增区域 */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm gap-4">
+        <div className="relative w-full sm:w-80">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Input placeholder="搜索投标项目名称或编号..." className="pl-9 bg-slate-50 border-slate-200" />
+        </div>
+        <Button className="bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto" onClick={() => setIsAddModalOpen(true)}>
+          <Plus className="h-4 w-4 mr-2" />
+          新增复盘
+        </Button>
+      </div>
+
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
@@ -245,6 +267,29 @@ export function PreBidReview() {
           </Card>
         </div>
       </div>
+
+      {isAddModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md flex flex-col animate-in zoom-in-95 duration-300">
+            <div className="flex items-center justify-between p-5 border-b border-slate-100">
+              <h3 className="text-lg font-bold text-slate-900">新增投标前复盘</h3>
+              <button onClick={() => setIsAddModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="p-5 space-y-4">
+              <label className="text-sm font-medium text-slate-700">选择要复盘的投标项目</label>
+              <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2">
+                {projectList.map((item, idx) => (
+                  <div key={idx} className="p-3 border border-slate-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 cursor-pointer transition-colors" onClick={() => setIsAddModalOpen(false)}>
+                    <div className="font-medium text-slate-900 text-sm">{item}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

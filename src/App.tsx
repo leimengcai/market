@@ -11,10 +11,15 @@ import { KnowledgeBase } from './views/KnowledgeBase';
 import { ReviewReports } from './views/ReviewReports';
 import { AnalysisReports } from './views/AnalysisReports';
 import { ProjectLifecycle } from './views/ProjectLifecycle';
-
 import { PartnerDirectory } from './views/PartnerDirectory';
-
 import { MarketInfo } from './views/MarketInfo';
+
+import { Prequalification } from './views/Prequalification';
+import { BidDocReview } from './views/BidDocReview';
+import { BondPay } from './views/BondPay';
+import { BidProjectReview } from './views/BidProjectReview';
+import { BidResult } from './views/BidResult';
+import { BondReturn } from './views/BondReturn';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -71,6 +76,12 @@ export default function App() {
       case 'reports': return <ReviewReports />;
       case 'data-analysis': return <AnalysisReports />;
       case 'knowledge': return <KnowledgeBase />;
+      case 'prequal': return <Prequalification />;
+      case 'doc-review': return <BidDocReview />;
+      case 'bond-pay': return <BondPay />;
+      case 'bid-review': return <BidProjectReview />;
+      case 'bid-result': return <BidResult />;
+      case 'bond-return': return <BondReturn />;
       default: return (
         <div className="flex h-full items-center justify-center text-slate-500 flex-col gap-4 animate-in fade-in duration-500">
           <Box className="h-12 w-12 text-slate-300" />

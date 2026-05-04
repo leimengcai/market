@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   LayoutDashboard, Users, Flag, Database, ListFilter, FileCheck, SearchCode, Search, Menu, Building2,
-  Target, UserCheck, CircleDollarSign, BookOpen, Award, ArrowLeftRight, BarChart3, Box, PieChart
+  Target, UserCheck, CircleDollarSign, BookOpen, Award, ArrowLeftRight, BarChart3, Box, PieChart, UserCircle
 } from 'lucide-react';
 import { Dashboard } from './views/Dashboard';
 import { ProjectLevel } from './views/ProjectLevel';
@@ -20,6 +20,7 @@ import { BondPay } from './views/BondPay';
 import { BidProjectReview } from './views/BidProjectReview';
 import { BidResult } from './views/BidResult';
 import { BondReturn } from './views/BondReturn';
+import { Personas } from './views/Personas';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -60,6 +61,7 @@ export default function App() {
         { id: 'data-analysis', name: '全维度运营分析表', icon: PieChart },
         { id: 'reports', name: '复盘报表与分析', icon: BarChart3 },
         { id: 'knowledge', name: '数据与知识库沉淀', icon: Database },
+        { id: 'user-personas', name: '用户画像', icon: UserCircle },
       ]
     }
   ];
@@ -76,6 +78,7 @@ export default function App() {
       case 'reports': return <ReviewReports />;
       case 'data-analysis': return <AnalysisReports />;
       case 'knowledge': return <KnowledgeBase />;
+      case 'user-personas': return <Personas />;
       case 'prequal': return <Prequalification />;
       case 'doc-review': return <BidDocReview />;
       case 'bond-pay': return <BondPay />;

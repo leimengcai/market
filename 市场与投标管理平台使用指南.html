@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>市场与投标管理平台 · 互动使用指南</title>
+    <style>
+      :root {
+        --bg: #000;
+        --bg2: #0a0a0c;
+        --panel: #0d0d0f;
+        --panel-2: #15151a;
+        --panel-3: #1c1c22;
+        --line: #2a2a30;
+        --gold: #d4af37;
+        --gold-bright: #ffd700;
+        --gold-dim: #8a7128;
+        --gold-glow: rgba(212, 175, 55, 0.4);
+        --text: #fff;
+        --text-dim: #bdbdbd;
+        --text-mute: #7a7a7a;
+        --green: #3ddc84;
+        --red: #ff4d6d;
+        --yellow: #ffce47;
+        --blue: #4dabff;
+        --purple: #b46bff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+      html,
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--gold-dim), #3a3a40);
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--gold);
+      }
+      a {
+        color: var(--gold-bright);
+        text-decoration: none;
+      }
+      a:hover {
+        color: #fff;
+      }
+
+      /* ========== 顶部 Hero ========== */
+      .hero {
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(212, 175, 55, 0.15),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(180, 107, 255, 0.08),
+            transparent 50%
+          ),
+          linear-gradient(180deg, #050505 0%, #000 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        padding: 40px 20px;
+      }
+      .hero-company {
+        font-size: 14px;
+        letter-spacing: 6px;
+        color: var(--gold);
+        margin-bottom: 24px;
+        font-weight: 600;
+        animation: fadeIn 1s ease;
+      }
+      .hero-title {
+        font-size: 72px;
+        font-weight: 900;
+        line-height: 1;
+        background: linear-gradient(
+          135deg,
+          var(--gold-bright) 0%,
+          #fff 50%,
+          var(--gold) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 80px rgba(212, 175, 55, 0.3);
+        letter-spacing: 4px;
+        margin-bottom: 14px;
+        animation: fadeIn 1.2s ease;
+        text-align: center;
+      }
+      .hero-subtitle {
+        font-size: 24px;
+        color: var(--text-dim);
+        letter-spacing: 8px;
+        margin-bottom: 8px;
+        animation: fadeIn 1.4s ease;
+        text-align: center;
+      }
+      .hero-tag {
+        display: inline-block;
+        padding: 8px 24px;
+        border: 1.5px solid var(--gold);
+        border-radius: 30px;
+        font-size: 13px;
+        color: var(--gold-bright);
+        margin: 30px 0;
+        letter-spacing: 2px;
+        font-weight: 600;
+        background: rgba(212, 175, 55, 0.05);
+        animation: fadeIn 1.6s ease;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        margin-top: 30px;
+        animation: fadeIn 1.8s ease;
+      }
+      .btn-hero {
+        padding: 14px 32px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+        color: #000;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 1px;
+        font-family: inherit;
+        transition: all 0.2s;
+        box-shadow: 0 4px 20px var(--gold-glow);
+      }
+      .btn-hero:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px var(--gold-glow);
+      }
+      .btn-ghost {
+        padding: 14px 32px;
+        background: transparent;
+        color: var(--gold);
+        border: 1.5px solid var(--gold-dim);
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        letter-spacing: 1px;
+        font-family: inherit;
+        transition: all 0.2s;
+      }
+      .btn-ghost:hover {
+        background: rgba(212, 175, 55, 0.1);
+        border-color: var(--gold);
+        color: var(--gold-bright);
+      }
+      .scroll-down {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--gold);
+        font-size: 24px;
+        cursor: pointer;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translate(-50%, 0);
+        }
+        50% {
+          transform: translate(-50%, 12px);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ========== 阅读进度条 ========== */
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0;
+        background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+        z-index: 1000;
+        box-shadow: 0 0 10px var(--gold-glow);
+        transition: width 0.1s;
+      }
+
+      /* ========== 整体布局 ========== */
+      .container {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      /* ========== 侧栏 ========== */
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding: 30px 20px;
+        border-right: 1px solid var(--line);
+        overflow-y: auto;
+        background: linear-gradient(180deg, rgba(10, 10, 12, 0.96), #000);
+        backdrop-filter: blur(8px);
+      }
+      .sidebar-h {
+        font-size: 11px;
+        color: var(--text-mute);
+        letter-spacing: 2px;
+        margin-bottom: 14px;
+        font-weight: 700;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 14px;
+        color: var(--text-dim);
+        cursor: pointer;
+        font-size: 13px;
+        border-left: 2px solid transparent;
+        margin-bottom: 2px;
+        transition: all 0.15s;
+        border-radius: 0 4px 4px 0;
+      }
+      .nav-item:hover {
+        background: #16161c;
+        color: #fff;
+      }
+      .nav-item.active {
+        background: linear-gradient(
+          90deg,
+          rgba(212, 175, 55, 0.2),
+          transparent
+        );
+        color: var(--gold-bright);
+        border-left-color: var(--gold);
+        font-weight: 600;
+      }
+      .nav-item .num {
+        font-family: "SF Mono", Consolas, monospace;
+        color: var(--gold-dim);
+        font-size: 11px;
+        width: 24px;
+      }
+
+      /* ========== 主区 ========== */
+      .main {
+        padding: 60px 60px 200px;
+        min-width: 0;
+      }
+      .chapter {
+        padding: 60px 0;
+        scroll-margin-top: 30px;
+        border-top: 1px dashed var(--line);
+      }
+      .chapter:first-of-type {
+        border-top: none;
+        padding-top: 30px;
+      }
+
+      .ch-no {
+        font-size: 12px;
+        color: var(--gold);
+        letter-spacing: 4px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .ch-title {
+        font-size: 42px;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--gold-bright), #fff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+      .ch-sub {
+        color: var(--text-dim);
+        font-size: 15px;
+        margin-bottom: 30px;
+        padding-left: 14px;
+        border-left: 3px solid var(--gold);
+      }
+      .h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        margin: 36px 0 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .h2::before {
+        content: "";
+        width: 4px;
+        height: 18px;
+        background: var(--gold);
+        border-radius: 2px;
+      }
+
+      /* ========== 卡片 ========== */
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 22px;
+        margin-bottom: 18px;
+        transition: all 0.2s;
+      }
+      .card:hover {
+        border-color: var(--gold-dim);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      }
+      .card-h {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--gold-bright);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      /* ========== KPI 计数器 ========== */
+      .stat {
+        background: linear-gradient(135deg, #13130f, #0a0a0a);
+        border: 1px solid #2a2418;
+        border-radius: 10px;
+        padding: 22px;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      .stat:hover {
+        transform: translateY(-3px);
+        border-color: var(--gold);
+      }
+      .stat .v {
+        font-size: 42px;
+        font-weight: 800;
+        color: var(--gold-bright);
+        font-family: "SF Mono", Consolas, monospace;
+        line-height: 1;
+        margin-bottom: 6px;
+        text-shadow: 0 0 20px var(--gold-glow);
+      }
+      .stat .l {
+        font-size: 11px;
+        color: var(--text-mute);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      /* ========== 步骤 ========== */
+      .step {
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 16px 18px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        border-left: 3px solid var(--gold);
+        transition: all 0.2s;
+        margin-bottom: 14px;
+      }
+      .step:hover {
+        border-left-color: var(--gold-bright);
+        transform: translateX(4px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      /* ========== 表格 ========== */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        background: var(--panel);
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 14px 0;
+      }
+      th {
+        text-align: left;
+        padding: 11px 14px;
+        background: #15150f;
+        color: var(--gold);
+        border-bottom: 1px solid var(--gold-dim);
+        font-weight: 600;
+      }
+      td {
+        padding: 10px 14px;
+        border-bottom: 1px solid #1c1c22;
+        color: var(--text-dim);
+      }
+      tr:hover td {
+        background: #0f0f12;
+        color: #fff;
+      }
+      .tag {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        border: 1px solid;
+        white-space: nowrap;
+      }
+
+      /* ========== 生命周期时间线 ========== */
+      .lifecycle {
+        position: relative;
+        padding: 30px 0;
+        margin: 20px 0;
+      }
+      .lifecycle::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(
+          180deg,
+          var(--gold-dim),
+          var(--gold-bright),
+          var(--gold-dim)
+        );
+        transform: translateX(-50%);
+      }
+      .life-stage {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 60px 1fr;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .life-stage:nth-child(odd) .life-card-body {
+        justify-self: end;
+        text-align: right;
+        border-right: 3px solid var(--gold);
+      }
+      .life-stage:nth-child(even) .life-card-body {
+        grid-column: 3;
+        border-left: 3px solid var(--gold);
+      }
+      .life-stage:nth-child(odd) .life-spacer {
+        grid-column: 3;
+      }
+      .life-stage:nth-child(even) .life-spacer {
+        grid-column: 1;
+      }
+      .life-card-body {
+        background: var(--panel);
+        padding: 14px 18px;
+        border-radius: 8px;
+        max-width: 320px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid var(--line);
+      }
+      .life-card-body:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 24px rgba(212, 175, 55, 0.2);
+      }
+      .life-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--gold);
+        border: 4px solid #000;
+        justify-self: center;
+        box-shadow: 0 0 16px var(--gold-glow);
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- ========== 封面 Hero ========== -->
+    <section class="hero" id="top">
+      <div class="hero-company">企业数字化管理</div>
+      <h1 class="hero-title">
+        市场与投标管理平台<br />(Market & Bid Management)
+      </h1>
+      <div class="hero-subtitle">
+        全生命周期跟踪 · 智能化复盘 · 多维数据画像
+      </div>
+      <span class="hero-tag">★ 使用指南及业务逻辑说明 ★</span>
+
+      <div class="hero-actions">
+        <button
+          class="btn-hero"
+          onclick="document.getElementById('ch1').scrollIntoView()"
+        >
+          ▶ 开始评估
+        </button>
+      </div>
+
+      <div
+        class="scroll-down"
+        onclick="document.getElementById('ch1').scrollIntoView()"
+      >
+        ▼
+      </div>
+    </section>
+
+    <!-- ========== 主体 ========== -->
+    <div class="container">
+      <!-- ========== 侧栏 ========== -->
+      <aside class="sidebar">
+        <div class="sidebar-h">目录导航</div>
+        <div class="nav-item active" data-target="ch1">
+          <span class="num">01</span>平台概述
+        </div>
+        <div class="nav-item" data-target="ch2">
+          <span class="num">02</span>工作台总览
+        </div>
+        <div class="nav-item" data-target="ch3">
+          <span class="num">03</span>市场信息与分级
+        </div>
+        <div class="nav-item" data-target="ch4">
+          <span class="num">04</span>全生命周期管理
+        </div>
+        <div class="nav-item" data-target="ch5">
+          <span class="num">05</span>投标机制与复盘
+        </div>
+        <div class="nav-item" data-target="ch6">
+          <span class="num">06</span>多维数据画像
+        </div>
+        <div class="nav-item" data-target="ch7">
+          <span class="num">07</span>权限与业务流设计
+        </div>
+      </aside>
+
+      <!-- ========== 主区 ========== -->
+      <main class="main">
+        <section class="chapter" id="ch1">
+          <div class="ch-no">CHAPTER 01</div>
+          <h2 class="ch-title">平台概述</h2>
+          <p class="ch-sub">
+            解决市场开发阶段的过程不可视、资源投入盲目、复盘缺失等问题。
+          </p>
+
+          <div class="grid grid-3">
+            <div class="stat">
+              <div class="v">1</div>
+              <div class="l">统一数据工作台</div>
+            </div>
+            <div class="stat">
+              <div class="v">12</div>
+              <div class="l">核心业务模块</div>
+            </div>
+            <div class="stat">
+              <div class="v">4</div>
+              <div class="l">多维画像引擎</div>
+            </div>
+          </div>
+
+          <div class="h2">核心建设目标</div>
+          <div class="grid grid-2">
+            <div class="card">
+              <div class="card-h">📈 过程数字化</div>
+              <p>
+                将市场项目从线索收集、立项到投标的结果进行端到端线上管理，拒绝“盲盒”式经营。
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-h">🎯 项目分级与资源倾斜</div>
+              <p>
+                根据合同额、战略属性，对项目进行A/B/C分级，确保优势资源向A级高价值项目倾斜。
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-h">🔄 规则化强制复盘</div>
+              <p>
+                针对参与投标的重点项目，系统强制实施“落标/中标”的深度复盘机制，提取改进措施。
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-h">🧠 知识与画像沉淀</div>
+              <p>
+                自动汇总对手、业主、合作方的高频特征，生成动态画像模型，指导后续博弈策略。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="ch2">
+          <div class="ch-no">CHAPTER 02</div>
+          <h2 class="ch-title">工作台总览 (Dashboard)</h2>
+          <p class="ch-sub">快速洞察经营状况与待办任务</p>
+
+          <div class="card">
+            <p><b>视图组成：</b></p>
+            <ul>
+              <li>
+                <b style="color: var(--gold-bright)">KPI 指标卡</b
+                >：当期跟进项目数、累计中标额、总体中标率、待办审批数。
+              </li>
+              <li>
+                <b style="color: var(--gold-bright)">转化漏斗图</b
+                >：直观展示项目从“信息收集 -> 资格预审 -> 投标立项 -> 确认中标”
+                的损耗和转化情况。
+              </li>
+              <li>
+                <b style="color: var(--gold-bright)">行业资产分布</b
+                >：各行业领域（如化工、新能源、基建）的历史订单占比雷达图。
+              </li>
+              <li>
+                <b style="color: var(--gold-bright)">最新项目动态</b
+                >：时间轴模式展示全公司的最新推进记录及风险预警提示。
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="chapter" id="ch3">
+          <div class="ch-no">CHAPTER 03</div>
+          <h2 class="ch-title">市场信息与分级管理</h2>
+          <p class="ch-sub">严控准入，实施基于战略考量的智能分级机制</p>
+
+          <div class="h2">项目分级模型</div>
+          <table>
+            <tr>
+              <th>等级</th>
+              <th>定性指标</th>
+              <th>资源与跟踪要求</th>
+            </tr>
+            <tr>
+              <td>
+                <span style="color: var(--red); font-weight: bold"
+                  >A级 (战略/重大)</span
+                >
+              </td>
+              <td>预计合同额 > 1亿 或 极高战略价值</td>
+              <td>公司级响应，高管挂帅，每周通报进度</td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color: var(--gold-bright); font-weight: bold"
+                  >B级 (重点)</span
+                >
+              </td>
+              <td>预计合同额 3k万~1亿 或 重点开拓领域</td>
+              <td>部门级响应，核心骨干负责，定期跟进</td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color: var(--blue); font-weight: bold"
+                  >C级 (常规)</span
+                >
+              </td>
+              <td>预计合同额 < 3k万</td>
+              <td>业务员常规跟进，低频监测</td>
+            </tr>
+          </table>
+
+          <div class="step" style="margin-top: 20px">
+            <div class="step-body">
+              <h4 style="color: var(--gold-bright)">智能提级逻辑</h4>
+              <p>
+                系统内置了风险与机遇打标器（如“首次进入新赛道”、“海外重点投资区”、“战略盟友项目”等标签）。如果低额度项目命中重要战略标签，系统可<b
+                  style="color: var(--green)"
+                  >自动触发提级建议</b
+                >（例如从C级提升至B级），防止贻误重要市场机遇。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="ch4">
+          <div class="ch-no">CHAPTER 04</div>
+          <h2 class="ch-title">全生命周期管理</h2>
+          <p class="ch-sub">市场开发的每一步都可查、可控、可追溯</p>
+
+          <div class="lifecycle">
+            <div class="life-stage">
+              <div class="life-card-body">
+                <div class="stage-nm">① 信息录入与分级</div>
+                <div class="stage-desc">
+                  线索发现、查重、基本信息登记并打上 A/B/C 分级标签。
+                </div>
+              </div>
+              <div class="life-dot"></div>
+              <div class="life-spacer"></div>
+            </div>
+            <div class="life-stage">
+              <div class="life-spacer"></div>
+              <div class="life-dot"></div>
+              <div class="life-card-body">
+                <div class="stage-nm">② 立项前复盘 (Pre-Bid)</div>
+                <div class="stage-desc">
+                  对于高价值项目，在投入编制保证金前进行风险与胜率复盘评估。
+                </div>
+              </div>
+            </div>
+            <div class="life-stage">
+              <div class="life-card-body">
+                <div class="stage-nm">③ 资格预审评定</div>
+                <div class="stage-desc">
+                  录入我方资质符合度、历史业绩匹配情况，记录预审通过或失败的结果。
+                </div>
+              </div>
+              <div class="life-dot"></div>
+              <div class="life-spacer"></div>
+            </div>
+            <div class="life-stage">
+              <div class="life-spacer"></div>
+              <div class="life-dot"></div>
+              <div class="life-card-body">
+                <div class="stage-nm">④ 招标文件评审与立项</div>
+                <div class="stage-desc">
+                  商务、技术、法务连编评审，确认无重大隐患后正式确认投标立项编号。
+                </div>
+              </div>
+            </div>
+            <div class="life-stage">
+              <div class="life-card-body">
+                <div class="stage-nm">⑤ 保证金协同</div>
+                <div class="stage-desc">
+                  发起保证金申请、财务支付记录、退回状态的闭环流程。
+                </div>
+              </div>
+              <div class="life-dot"></div>
+              <div class="life-spacer"></div>
+            </div>
+            <div class="life-stage">
+              <div class="life-spacer"></div>
+              <div class="life-dot"></div>
+              <div class="life-card-body">
+                <div class="stage-nm">⑥ 开标结果与复盘</div>
+                <div class="stage-desc">
+                  记录我方与对手报价，判定排名与中标。落标重难项目进入<strong
+                    style="color: var(--gold-bright)"
+                    >强制投标后复盘</strong
+                  >环节。
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="ch5">
+          <div class="ch-no">CHAPTER 05</div>
+          <h2 class="ch-title">投标机制与深度复盘</h2>
+          <p class="ch-sub">“打一仗，进一步”，拒绝重复犯错</p>
+
+          <div class="grid grid-2">
+            <div class="card">
+              <div class="card-h">六看分析法 (Six-Look Method)</div>
+              <p style="font-size: 13px">贯穿投标前后复盘的核心方法论：</p>
+              <ul>
+                <li>
+                  <b style="color: var(--gold-bright)">看过程：</b
+                  >时间节点、各方响应率
+                </li>
+                <li>
+                  <b style="color: var(--gold-bright)">看决策：</b
+                  >报价策略、人员排布
+                </li>
+                <li>
+                  <b style="color: var(--gold-bright)">看对手：</b
+                  >对方优劣势、出价套路
+                </li>
+                <li>
+                  <b style="color: var(--gold-bright)">看客户：</b
+                  >评标人关注点、隐藏诉求
+                </li>
+                <li>
+                  <b style="color: var(--gold-bright)">看队友：</b
+                  >联合体协作效率
+                </li>
+                <li>
+                  <b style="color: var(--gold-bright)">看自己：</b
+                  >技术与商务盲区自省
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-h">智能强制校验与关联</div>
+              <p style="font-size: 13px">
+                投标后记录「未中标」结果时，系统自动关联弹出要求填写<b>“主要败因分析”</b>与<b>“失标金额差距”</b>。
+              </p>
+              <p style="font-size: 13px">
+                若项目等级为 A 或
+                B，系统则派发“待深度复盘任务”，限期生成规范总结，并将改善措施推送至关联负责人。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="ch6">
+          <div class="ch-no">CHAPTER 06</div>
+          <h2 class="ch-title">用户与多维数据画像 (Personas)</h2>
+          <p class="ch-sub">从碎片化的历史中提炼竞争武器</p>
+
+          <div class="grid grid-2">
+            <div class="card">
+              <div class="card-h">👥 客户画像 (Customer)</div>
+              <p style="font-size: 12px">
+                通过整合客户的历史项目记录，自动生成“关系热度评分”。<br />功能亮点：总结客户的招标偏好、付款风格及历次落标的敏感雷区。
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-h">⚔ 对手画像 (Competitor)</div>
+              <p style="font-size: 12px">
+                对特定区域/行业的直接竞争对手进行建档。<br />功能亮点：胜率对比矩阵、对手报价下浮率预测模型、对手常用资质展示。
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-h">🤝 合作方画像 (Partner)</div>
+              <p style="font-size: 12px">
+                对中介人/联营方/核心供应商进行信用评分。<br />功能亮点：控盘能力、响应速度评估、系统级黑白名单预警机制。
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-h">📊 项目健康度与组织智商</div>
+              <p style="font-size: 12px">
+                监控项目的推进活跃度，识别“僵尸项目”。评估内部团队配合效率和对复盘改进措施的闭环执行率。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="ch7">
+          <div class="ch-no">CHAPTER 07</div>
+          <h2 class="ch-title">权限与业务流设计</h2>
+          <p class="ch-sub">职责分明的数据管控机制</p>
+
+          <table class="perm-table">
+            <tr>
+              <th>角色</th>
+              <th>数据可见范围</th>
+              <th>核心权限</th>
+            </tr>
+            <tr>
+              <td>👑 公司高管</td>
+              <td>全公司所有项目及汇总报表</td>
+              <td>全局掌控、重大项目(A级)审核与决策</td>
+            </tr>
+            <tr>
+              <td>👨‍💼 市场部管理者</td>
+              <td>全公司所有项目</td>
+              <td>统筹分配、跨部门指派、审批与调级</td>
+            </tr>
+            <tr>
+              <td>🏢 分公司/事业部负责人</td>
+              <td>仅限本部门所属区域/领域项目</td>
+              <td>本部门项目推进、业绩看板、审批与监督</td>
+            </tr>
+            <tr>
+              <td>👤 区域销售/业务员</td>
+              <td>仅限本人负责的项目跟进记录</td>
+              <td>日常线索录入、进度更新、各类单据申请发起</td>
+            </tr>
+          </table>
+
+          <div style="margin-top: 40px; text-align: center">
+            <button
+              class="btn-hero"
+              onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            >
+              ⤴ 返回顶部再次浏览
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <div class="ttl">企业数字化核心系统规划</div>
+      <div class="meta">
+        市场与投标管理平台 (Market & Bid Management) · 使用说明书与需求原型
+      </div>
+    </footer>
+
+    <script>
+      const progressBar = document.getElementById("progressBar");
+      window.addEventListener("scroll", () => {
+        const h = document.documentElement;
+        const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+        progressBar.style.width = pct + "%";
+      });
+
+      const navItems = document.querySelectorAll(".nav-item");
+      const chapters = document.querySelectorAll(".chapter");
+      navItems.forEach((n) => {
+        n.addEventListener("click", () => {
+          const tg = n.dataset.target;
+          const el = document.getElementById(tg);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              navItems.forEach((n) =>
+                n.classList.toggle("active", n.dataset.target === e.target.id),
+              );
+            }
+          });
+        },
+        { rootMargin: "-30% 0px -60% 0px" },
+      );
+      chapters.forEach((c) => spy.observe(c));
+    </script>
+  </body>
+</html>
